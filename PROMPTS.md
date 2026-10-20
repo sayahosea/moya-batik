@@ -11,17 +11,35 @@ Ubah app/page.jsx supaya daftar produk diambil dari tabel "produk" di Supabase, 
 
 Tampilkan produk dengan komponen KartuProduk yang sudah ada, tanpa mengubah tampilannya. Kalau gagal mengambil data, tampilkan pesan error yang jelas di halaman. Kalau tabel kosong, tampilkan tulisan "Belum ada produk". Hapus CatatanBelumAktif dari halaman ini.
 
+**[SENDIRI]**: buat teks untuk Hasil dan Perbaikan.
+
 **Hasil:**
+- Modul koneksi Supabase untuk server berhasil dibuat di `lib/supabase/server.js` dan diekspor lewat `lib/supabase/index.js` menggunakan `SUPABASE_URL` dan `SUPABASE_SECRET_KEY`.
+- Halaman `app/page.jsx` berhasil diubah menjadi Server Component yang mengambil data produk langsung dari tabel `produk` di Supabase.
+- Daftar produk ditampilkan rapi dengan komponen `KartuProduk` yang sudah ada.
+- Ketergantungan pada `lib/data-contoh.js` serta komponen `CatatanBelumAktif` sudah dihapus dari halaman katalog.
+- Pesan error jelas jika pengambilan data gagal, dan tulisan "Belum ada produk" ditampilkan jika tabel kosong.
+- Build Next.js sukses tanpa error.
 
 **Perbaikan:**
+- Tidak ada perbaikan tambahan; implementasi langsung berhasil dan memenuhi seluruh kriteria US-01 pada percobaan pertama.
 
 ## US-02 Detail produk
 
 **Prompt:**
+Baca docs/user-stories.md bagian US-02.
+
+Ubah app/produk/[id]/page.jsx supaya mengambil satu produk dari tabel "produk" di Supabase berdasarkan id di URL, di sisi server, memakai koneksi Supabase yang sudah dibuat di lib/supabase. Kalau produk tidak ditemukan, panggil notFound(). Jangan ubah tampilannya. Hapus CatatanBelumAktif dari halaman ini, tapi biarkan tombol WhatsApp.
 
 **Hasil:**
+- Halaman `app/produk/[id]/page.jsx` berhasil diubah menjadi Server Component yang mengambil satu produk dari tabel `produk` di Supabase berdasarkan parameter `id`.
+- Ketergantungan pada `lib/data-contoh.js` dan komponen `CatatanBelumAktif` telah dihapus.
+- Memanggil `notFound()` jika produk tidak ditemukan atau ID tidak valid, sehingga menampilkan halaman 404 kustom.
+- Tampilan detail produk dan tombol WhatsApp tetap dipertahankan.
+- Build Next.js sukses tanpa kendala.
 
 **Perbaikan:**
+- Tidak ada perbaikan tambahan; fitur langsung berfungsi sesuai kriteria US-02 pada percobaan pertama.
 
 ## US-03 Pesan via WhatsApp
 
