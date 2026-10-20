@@ -1,13 +1,48 @@
 import { notFound } from "next/navigation";
 import NavAdmin from "@/components/NavAdmin";
 import FormProduk from "@/components/FormProduk";
-import CatatanBelumAktif from "@/components/CatatanBelumAktif";
-import { cariProdukContoh } from "@/lib/data-contoh";
+import { buatKoneksiAdmin } from "@/lib/supabase/admin";
+import { buatKoneksiServer } from "@/lib/supabase/server";
+import { ubahProduk } from "@/app/admin/actions";
 
-// US-09 (bonus di jalur offline): ubah produk.
+export const dynamic = "force-dynamic";
+
 export default async function HalamanUbahProduk({ params }) {
   const { id } = await params;
-  const produk = cariProdukContoh(id);
+
+  let produk = null;
+  try {
+    const supabase = await buatKoneksiAdmin();
+    const { data } = await supabase
+      .from("produk")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+
+    if (data) {
+      produk = data;
+    } else {
+      const serverClient = buatKoneksiServer();
+      const { data: sData } = await serverClient
+        .from("produk")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle();
+      produk = sData;
+    }
+  } catch {
+    try {
+      const serverClient = buatKoneksiServer();
+      const { data: sData } = await serverClient
+        .from("produk")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle();
+      produk = sData;
+    } catch {
+      produk = null;
+    }
+  }
 
   if (!produk) {
     notFound();
@@ -17,8 +52,7 @@ export default async function HalamanUbahProduk({ params }) {
     <div className="flex flex-col gap-6 py-8">
       <NavAdmin />
       <h1 className="text-2xl font-extrabold">Ubah produk</h1>
-      <CatatanBelumAktif>Simpan perubahan belum berfungsi: lihat US-09.</CatatanBelumAktif>
-      <FormProduk produk={produk} labelTombol="Simpan perubahan" />
+      <FormProduk produk={produk} action={ubahProduk} labelTombol="Simpan perubahan" />
     </div>
   );
 }

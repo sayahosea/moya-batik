@@ -112,3 +112,66 @@ Buat file proxy.js di root proyek (Next.js 16). Semua rute /admin kecuali /admin
 ## Debugging dan fitur bonus
 
 Tambahkan bagian baru untuk setiap error yang kamu perbaiki atau fitur bonus yang kamu kerjakan.
+
+## US-07 List Produk
+
+**Prompt:**
+Baca app/docs/user-stories.md US-07 List Produk.
+
+Kerjakan sesuai bagian itu yaitu:
+Sebagai admin, saya ingin produk pada page `/admin` mengambil data dari database.
+
+Kriteria selesai:
+- Daftar produk di `/admin` diambil dari database, bukan data contoh.
+
+Abaikan teks poin itu.
+
+**Hasil:**
+- Halaman `app/admin/page.jsx` berhasil diubah untuk mengambil seluruh daftar produk langsung dari tabel `produk` di database Supabase secara server-side.
+- Ketergantungan terhadap `lib/data-contoh.js` telah dihapus.
+- Data produk dari database berhasil ditampilkan menggunakan komponen `TabelProduk` yang sudah ada.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; daftar produk di `/admin` langsung terhubung ke database dan berfungsi sesuai kriteria US-07 pada percobaan pertama.
+
+## US-08 Tambah produk
+## US-09 Ubah produk
+## US-10 Hapus produk
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-08 Tambah produk
+- US-09 Ubah produk
+- US-10 Hapus produk.
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Dibuat Server Action `tambahProduk`, `ubahProduk`, dan `hapusProduk` di `app/admin/actions.js` dengan proteksi login server (`supabase.auth.getUser()`).
+- Form tambah produk di `/admin/produk/baru` berhasil menyimpan data baru ke database dan mengarahkan kembali ke `/admin`.
+- Form ubah produk di `/admin/produk/[id]/ubah` memuat data lama dari Supabase dan menyimpan perubahannya.
+- Tombol hapus di `components/TabelProduk.jsx` menampilkan konfirmasi dialog sebelum menghapus data dari database.
+- Komponen `CatatanBelumAktif` telah dihapus dari seluruh halaman terkait.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Menambahkan penanganan fallback aman pada pembacaan `cookies()` di `lib/supabase/admin.js` untuk memastikan Server Action dapat dievaluasi secara konsisten tanpa error konteks request.
+
+## US-11 Filter kategori atau pencarian
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-11 Filter kategori atau pencarian
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Halaman `app/page.jsx` berhasil mengimplementasikan filter kategori dinamis dan pencarian nama produk berbasis `searchParams`.
+- Query Supabase menggunakan `.ilike()` untuk pencarian nama produk dan `.eq()` untuk filter kategori.
+- Antarmuka pencarian dan barisan pill filter kategori terintegrasi rapi dengan mempertahankan token desain Tailwind yang ada.
+- Tombol Reset otomatis tampil jika ada filter atau kata kunci yang aktif.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; filter kategori dan pencarian berfungsi sesuai kriteria US-11 pada percobaan pertama.
