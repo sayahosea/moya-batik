@@ -19,7 +19,7 @@ Tampilkan produk dengan komponen KartuProduk yang sudah ada, tanpa mengubah tamp
 - Daftar produk ditampilkan rapi dengan komponen `KartuProduk` yang sudah ada.
 - Ketergantungan pada `lib/data-contoh.js` serta komponen `CatatanBelumAktif` sudah dihapus dari halaman katalog.
 - Pesan error jelas jika pengambilan data gagal, dan tulisan "Belum ada produk" ditampilkan jika tabel kosong.
-- Build Next.js sukses tanpa error.
+- Next.js build sukses tanpa error.
 
 **Perbaikan:**
 - Tidak ada perbaikan tambahan; implementasi langsung berhasil dan memenuhi seluruh kriteria US-01 pada percobaan pertama.
@@ -36,7 +36,7 @@ Ubah app/produk/[id]/page.jsx supaya mengambil satu produk dari tabel "produk" d
 - Ketergantungan pada `lib/data-contoh.js` dan komponen `CatatanBelumAktif` telah dihapus.
 - Memanggil `notFound()` jika produk tidak ditemukan atau ID tidak valid, sehingga menampilkan halaman 404 kustom.
 - Tampilan detail produk dan tombol WhatsApp tetap dipertahankan.
-- Build Next.js sukses tanpa kendala.
+- Next.js build sukses tanpa kendala.
 
 **Perbaikan:**
 - Tidak ada perbaikan tambahan; fitur langsung berfungsi sesuai kriteria US-02 pada percobaan pertama.
@@ -53,7 +53,7 @@ Ubah components/TombolWhatsApp.jsx menjadi tautan yang membuka https://wa.me/ ke
 - Pesan otomatis memuat nama dan harga produk berformat rupiah yang di-encode dengan `encodeURIComponent`.
 - Tautan membuka di tab baru (`target="_blank"`, `rel="noopener noreferrer"`) dengan tampilan tombol yang tetap konsisten.
 - CatatanBelumAktif terkait US-03 di halaman detail produk sudah dihapus.
-- Build Next.js sukses tanpa error.
+- Next.js build sukses tanpa error.
 
 **Perbaikan:**
 - Tidak ada perbaikan tambahan; tombol berfungsi sesuai kriteria US-03 pada percobaan pertama.
@@ -331,7 +331,6 @@ Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
 **Perbaikan:**
 - Tidak ada perbaikan tambahan; harga coret dan badge produk berhasil tampil sesuai kriteria US-20 pada percobaan pertama.
 
-
 ## US-21 Keranjang, pesan semua via WhatsApp
 
 **Prompt:**
@@ -341,17 +340,80 @@ Baca app/docs/user-stories.md:
 Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
 
 **Hasil:**
-- Dibuat components/KeranjangProvider.jsx (Context + Provider) yang menyimpan isi keranjang di localStorage sehingga bertahan saat berpindah halaman.
-- Dibuat tombol "Tambah ke keranjang" (components/TombolKeranjang.jsx) yang ditampilkan di halaman detail produk (app/produk/[id]/page.jsx) dengan umpan balik visual saat diklik.
-- Dibuat ikon keranjang (components/IkonKeranjang.jsx) di components/Header.jsx yang menampilkan badge jumlah item.
-- Dibuat halaman /keranjang (app/keranjang/page.jsx) yang menampilkan daftar item keranjang, kontrol ubah jumlah (tombol − dan +), tombol hapus per item, tombol kosongkan keranjang, dan total harga yang dihitung otomatis.
-- Satu tombol "Pesan semua via WhatsApp" mengirim seluruh isi keranjang dalam satu pesan terformat ke nomor WhatsApp toko di lib/toko.js.
-- app/layout.jsx dibungkus KeranjangProvider agar state keranjang tersedia secara global.
+- Dibuat `components/KeranjangProvider.jsx` (Context + Provider) yang menyimpan isi keranjang di `localStorage` sehingga bertahan saat berpindah halaman.
+- Dibuat tombol "Tambah ke keranjang" (`components/TombolKeranjang.jsx`) yang ditampilkan di halaman detail produk (`app/produk/[id]/page.jsx`) dengan umpan balik visual saat diklik.
+- Dibuat ikon keranjang (`components/IkonKeranjang.jsx`) di `components/Header.jsx` yang menampilkan badge jumlah item.
+- Dibuat halaman `/keranjang` (`app/keranjang/page.jsx`) yang menampilkan daftar item keranjang, kontrol ubah jumlah (tombol − dan +), tombol hapus per item, tombol kosongkan keranjang, dan total harga yang dihitung otomatis.
+- Satu tombol "Pesan semua via WhatsApp" mengirim seluruh isi keranjang dalam satu pesan terformat ke nomor WhatsApp toko di `lib/toko.js`.
+- `app/layout.jsx` dibungkus `KeranjangProvider` agar state keranjang tersedia secara global.
+- Next.js build sukses.
 
 **Perbaikan:**
 - Tidak ada perbaikan tambahan; fitur keranjang lengkap berfungsi sesuai seluruh kriteria US-21 pada percobaan pertama.
 
+## US-22 Halaman Tentang dan kontak toko
 
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-22 Halaman Tentang dan kontak toko
 
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
 
+**Hasil:**
+- Dibuat halaman profil toko di `app/tentang/page.jsx` (`/tentang`) yang menampilkan cerita usaha, profil UMKM, alamat gerai, jam operasional, dan tombol kontak langsung ke WhatsApp toko di `lib/toko.js`.
+- Halaman tertaut di header navigasi (`components/Header.jsx`) dan di footer (`components/Footer.jsx`).
+- Next.js build sukses.
 
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; halaman tentang dan kontak toko terhubung sesuai kriteria US-22 pada percobaan pertama.
+
+## US-23 Bagikan atau salin link produk
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-23 Bagikan atau salin link produk
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Dibuat komponen `components/TombolBagikan.jsx` dan ditautkan di halaman detail produk `app/produk/[id]/page.jsx`.
+- Menggunakan Web Share API (`navigator.share`) jika didukung, dengan fallback menyalin tautan produk langsung ke clipboard.
+- Memberikan umpan balik visual yang jelas berupa teks "Link tersalin!" beserta ikon centang setelah ditekan.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; fitur bagikan dan salin tautan produk berfungsi sesuai kriteria US-23 pada percobaan pertama.
+
+## US-24 Favorit tersimpan di browser
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-24 Favorit tersimpan di browser
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Dibuat `components/FavoritProvider.jsx` untuk mengelola data favorit di browser menggunakan `localStorage` sehingga data tersimpan dan bertahan setelah halaman dimuat ulang.
+- Dibuat tombol favorit (`components/TombolFavorit.jsx`) baik berbentuk ikon mengambang pada kartu produk (`components/KartuProduk.jsx`) maupun tombol aksi pada halaman detail produk (`app/produk/[id]/page.jsx`).
+- Dibuat tampilan khusus daftar favorit di `app/favorit/page.jsx` (`/favorit`) yang hanya memuat produk yang telah ditandai, lengkap dengan navigasi ikon favorit ber-badge di header.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; fitur simpan produk favorit dan halaman favorit berfungsi sesuai kriteria US-24 pada percobaan pertama.
+
+## US-25 Mode gelap
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-25 Mode gelap
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Menambahkan token tema gelap pada `app/globals.css` dengan kontras tinggi sehingga semua teks dan elemen tetap terbaca dengan nyaman di mode gelap maupun terang.
+- Dibuat komponen tombol pengalih tema (`components/TombolTema.jsx`) di header untuk berganti antara mode terang dan gelap dengan ikon matahari/bulan.
+- Pilihan mode gelap disimpan di `localStorage` dan dimuat ulang tanpa kedipan layar (FOUC) melalui script inisialisasi di `app/layout.jsx`.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; mode gelap terintegrasi menyeluruh pada token desain sesuai kriteria US-25 pada percobaan pertama.

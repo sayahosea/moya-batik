@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import TombolWhatsApp from "@/components/TombolWhatsApp";
 import TombolKeranjang from "@/components/TombolKeranjang";
+import TombolFavorit from "@/components/TombolFavorit";
+import TombolBagikan from "@/components/TombolBagikan";
 import GaleriFoto from "@/components/GaleriFoto";
 import KartuProduk from "@/components/KartuProduk";
 import { formatRupiah } from "@/lib/format";
@@ -96,6 +98,12 @@ export default async function HalamanDetailProduk({ params }) {
           <p className="max-w-prose leading-relaxed text-teks-lembut">{produk.deskripsi}</p>
           <TombolWhatsApp produk={produk} />
           <TombolKeranjang produk={produk} className="w-full sm:w-auto" />
+
+          {/* Fitur Tambahan: Favorit (US-24) & Bagikan (US-23) */}
+          <div className="flex flex-wrap gap-3 border-t border-garis pt-4">
+            <TombolFavorit produk={produk} varian="tombol" />
+            <TombolBagikan judul={produk.nama} deskripsi={produk.deskripsi} />
+          </div>
         </div>
       </article>
 

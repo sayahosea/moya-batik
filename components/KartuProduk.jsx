@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatRupiah } from "@/lib/format";
+import TombolFavorit from "@/components/TombolFavorit";
 
 export default function KartuProduk({ produk }) {
   const adaDiskon = Boolean(produk.harga_diskon && produk.harga_diskon < produk.harga);
@@ -29,6 +30,9 @@ export default function KartuProduk({ produk }) {
           )
         )}
       </div>
+
+      {/* Tombol Favorit (US-24) */}
+      <TombolFavorit produk={produk} varian="icon" className="absolute right-2.5 top-2.5 z-10" />
 
       <img
         src={fotoUtama}

@@ -22,6 +22,37 @@
   --color-bahaya: #b42318;
 }
 
+:root {
+  --color-latar: #ffffff;
+  --color-permukaan: #f1f5f2;
+  --color-garis: #dde5e0;
+  --color-teks: #1b2420;
+  --color-teks-lembut: #5b6a62;
+  --color-utama: #1f6b4f;
+  --color-utama-gelap: #154d39;
+  --color-harga: #7a4e09;
+  --color-harga-latar: #fbefd8;
+  --color-bahaya: #b42318;
+}
+
+html.dark {
+  color-scheme: dark;
+
+  --color-latar: #121815;
+  --color-permukaan: #1a231f;
+  --color-garis: #2c3a33;
+  --color-teks: #f1f5f2;
+  --color-teks-lembut: #9db1a6;
+
+  --color-utama: #2ea378;
+  --color-utama-gelap: #23805e;
+
+  --color-harga: #f3b652;
+  --color-harga-latar: #3b280a;
+
+  --color-bahaya: #f87171;
+}
+
 html {
   color: var(--color-teks);
   background: var(--color-latar);
