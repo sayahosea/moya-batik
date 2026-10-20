@@ -332,4 +332,26 @@ Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
 - Tidak ada perbaikan tambahan; harga coret dan badge produk berhasil tampil sesuai kriteria US-20 pada percobaan pertama.
 
 
+## US-21 Keranjang, pesan semua via WhatsApp
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-21 Keranjang, pesan semua via WhatsApp
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Dibuat components/KeranjangProvider.jsx (Context + Provider) yang menyimpan isi keranjang di localStorage sehingga bertahan saat berpindah halaman.
+- Dibuat tombol "Tambah ke keranjang" (components/TombolKeranjang.jsx) yang ditampilkan di halaman detail produk (app/produk/[id]/page.jsx) dengan umpan balik visual saat diklik.
+- Dibuat ikon keranjang (components/IkonKeranjang.jsx) di components/Header.jsx yang menampilkan badge jumlah item.
+- Dibuat halaman /keranjang (app/keranjang/page.jsx) yang menampilkan daftar item keranjang, kontrol ubah jumlah (tombol − dan +), tombol hapus per item, tombol kosongkan keranjang, dan total harga yang dihitung otomatis.
+- Satu tombol "Pesan semua via WhatsApp" mengirim seluruh isi keranjang dalam satu pesan terformat ke nomor WhatsApp toko di lib/toko.js.
+- app/layout.jsx dibungkus KeranjangProvider agar state keranjang tersedia secara global.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; fitur keranjang lengkap berfungsi sesuai seluruh kriteria US-21 pada percobaan pertama.
+
+
+
+
 

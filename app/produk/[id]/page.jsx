@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import TombolWhatsApp from "@/components/TombolWhatsApp";
+import TombolKeranjang from "@/components/TombolKeranjang";
 import GaleriFoto from "@/components/GaleriFoto";
 import KartuProduk from "@/components/KartuProduk";
 import { formatRupiah } from "@/lib/format";
@@ -94,6 +95,7 @@ export default async function HalamanDetailProduk({ params }) {
 
           <p className="max-w-prose leading-relaxed text-teks-lembut">{produk.deskripsi}</p>
           <TombolWhatsApp produk={produk} />
+          <TombolKeranjang produk={produk} className="w-full sm:w-auto" />
         </div>
       </article>
 
