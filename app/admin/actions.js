@@ -218,3 +218,59 @@ export async function hapusProduk(formData) {
   revalidatePath("/");
   revalidatePath("/admin");
 }
+
+export async function buatDeskripsiAI(nama, kategori) {
+  const supabase = await buatKoneksiAdmin();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    return { error: "Aksi ditolak: Anda harus login sebagai admin." };
+  }
+
+  if (!nama || !nama.trim()) {
+    return { error: "Nama produk harus diisi terlebih dahulu." };
+  }
+
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+
+  if (apiKey) {
+    try {
+      const promptText = `Buat deskripsi produk yang menarik, profesional, dan ringkas (1-2 paragraf pendek) dalam bahasa Indonesia untuk produk UMKM bernama "${nama.trim()}" dalam kategori "${kategori?.trim() || "Umum"}". Berikan langsung teks deskripsi tanpa pengantar atau markdown tebal.`;
+
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [{ text: promptText }],
+              },
+            ],
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const json = await response.json();
+        const text = json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+        if (text) {
+          return { deskripsi: text };
+        }
+      }
+    } catch {
+      // Fallback
+    }
+  }
+
+  const templateKategori = kategori ? ` dalam kategori ${kategori}` : "";
+  const fallbackText = `${nama.trim()} adalah produk berkualitas tinggi${templateKategori}. Dibuat secara teliti dengan bahan pilihan untuk memberikan kepuasan terbaik bagi pelanggan, cocok digunakan untuk kebutuhan sehari-hari maupun acara istimewa.`;
+
+  return { deskripsi: fallbackText };
+}

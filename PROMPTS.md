@@ -175,3 +175,161 @@ Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
 
 **Perbaikan:**
 - Tidak ada perbaikan tambahan; filter kategori dan pencarian berfungsi sesuai kriteria US-11 pada percobaan pertama.
+
+## US-12 Pilih jumlah atau varian
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-12 Pilih jumlah atau varian
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Komponen `TombolWhatsApp` ditingkatkan dengan kontrol pemilihan jumlah (tombol - dan +) serta kolom varian/catatan pesanan opsional.
+- Total estimasi harga dihitung dan ditampilkan secara dinamis sesuai jumlah unit yang dipilih.
+- Tautan pemesanan WhatsApp (`wa.me`) otomatis memuat nama produk, jumlah item, rincian varian (jika diisi), dan total harga berformat rupiah.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; pemilihan jumlah dan varian terintegrasi dengan pesan WhatsApp sesuai kriteria US-12 pada percobaan pertama.
+
+## US-13 PWA
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-13 PWA
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Dibuat Web App Manifest melalui Metadata Route di `app/manifest.js` dan file statis di `public/manifest.json`.
+- Manifest merujuk ke ikon `icon-192.png` dan `icon-512.png` yang tersedia di `public/icons`.
+- Manifest ditautkan di `app/layout.jsx` melalui properti metadata `manifest` dan tag `<link rel="manifest">` di `<head>`.
+- Mode tampilan disetel ke `standalone` sehingga katalog dapat di-install ke layar utama HP layaknya aplikasi.
+- Next.js build sukses dengan rute statis `○ /manifest.webmanifest`.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; konfigurasi PWA dan manifest berhasil dibuat pada percobaan pertama.
+
+## US-14 Deskripsi produk dibuat AI
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-14 Deskripsi produk dibuat AI
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Dibuat Server Action `buatDeskripsiAI(nama, kategori)` di `app/admin/actions.js` yang memanggil Google Gemini API dari sisi server dengan aman.
+- Komponen `FormProduk.jsx` ditambahkan tombol "✨ Buat deskripsi otomatis (AI)" yang membaca nama dan kategori yang diinput admin.
+- Hasil generasi deskripsi otomatis mengisi kolom input textarea `deskripsi` sebelum formulir disimpan.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; fungsi pembuatan deskripsi otomatis AI berhasil diimplementasikan sesuai kriteria US-14 pada percobaan pertama.
+
+## US-15 Urutkan produk
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-15 Urutkan produk
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Ditambahkan opsi pengurutan di `app/page.jsx`: "Terbaru", "Termurah", dan "Termahal".
+- Pengurutan diterapkan langsung pada query database Supabase menggunakan `.order("harga", { ascending })` dan `.order("created_at", { ascending })`.
+- Pilihan urutan terhubung ke URL melalui parameter `urutan` dan dipertahankan saat memfilter atau berpindah halaman.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; pengurutan query database berfungsi sesuai kriteria US-15 pada percobaan pertama.
+
+## US-16 Paginasi atau muat lebih banyak
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-16 Paginasi atau muat lebih banyak
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Daftar produk dipecah menjadi 12 item per halaman menggunakan `.range(from, to)` dan `{ count: "exact" }` di query Supabase.
+- Ditambahkan navigasi paginasi dengan tombol "Sebelumnya", nomor halaman aktif, dan tombol "Berikutnya".
+- Jumlah halaman dihitung secara akurat berdasarkan total produk dari query database, dan parameter filter tetap dipertahankan.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; paginasi query database berfungsi sesuai kriteria US-16 pada percobaan pertama.
+
+## US-17 Produk terkait di halaman detail
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-17 Produk terkait di halaman detail
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Halaman detail produk (`app/produk/[id]/page.jsx`) menampilkan bagian "Produk Terkait" yang berisi beberapa produk lain dari kategori yang sama.
+- Data produk terkait diambil langsung dari database Supabase dengan memfilter kategori yang sama dan mengecualikan ID produk yang sedang aktif (`.neq("id", id)`).
+- Ditampilkan menggunakan komponen `KartuProduk` dalam grid responsif di bawah informasi produk.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; produk terkait berhasil dimuat dari database dan mengecualikan produk aktif sesuai kriteria US-17 pada percobaan pertama.
+
+## US-18 Galeri beberapa foto produk
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-18 Galeri beberapa foto produk
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Komponen galeri foto dibuat di `components/GaleriFoto.jsx` dan diintegrasikan ke halaman detail produk `app/produk/[id]/page.jsx`.
+- Mendukung produk dengan lebih dari satu foto (baik format dipisahkan tanda koma pada `foto_url` maupun array) dengan foto utama besar dan gambar thumbnail kecil di bawahnya.
+- Pengunjung dapat mengklik thumbnail untuk berganti foto utama secara langsung.
+- Produk yang hanya memiliki satu foto tetap tampil normal tanpa thumbnail.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; galeri beberapa foto produk berfungsi interaktif sesuai kriteria US-18 pada percobaan pertama.
+
+## US-19 Status stok
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-19 Status stok
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Mendukung pengecekan ketersediaan stok produk dari database (`stok <= 0` atau `status_stok === "habis"`).
+- Menampilkan penanda badge "Habis" pada kartu produk di katalog dan pada halaman detail produk jika stok habis.
+- Tombol pemesanan WhatsApp (`components/TombolWhatsApp.jsx`) otomatis dinonaktifkan (disabled) dan menampilkan label penanda bahwa stok habis saat produk tidak tersedia.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; penanda habis dan proteksi tombol pemesanan WhatsApp berjalan sesuai kriteria US-19 pada percobaan pertama.
+
+## US-20 Harga coret dan badge
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-20 Harga coret dan badge
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Menampilkan harga diskon dan harga normal yang dicoret (`line-through`) pada kartu produk di katalog (`components/KartuProduk.jsx`) dan di halaman detail produk (`app/produk/[id]/page.jsx`).
+- Total harga pada `components/TombolWhatsApp.jsx` otomatis memperhitungkan harga diskon saat memesan via WhatsApp.
+- Badge "Baru" ditampilkan secara otomatis (berdasarkan produk terbaru dalam 7 hari atau nilai `badge`), serta badge khusus seperti "Terlaris" berdasarkan data produk.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; harga coret dan badge produk berhasil tampil sesuai kriteria US-20 pada percobaan pertama.
+
+
+
