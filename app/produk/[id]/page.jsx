@@ -8,8 +8,57 @@ import GaleriFoto from "@/components/GaleriFoto";
 import KartuProduk from "@/components/KartuProduk";
 import { formatRupiah } from "@/lib/format";
 import { buatKoneksiServer } from "@/lib/supabase/server";
+import { toko } from "@/lib/toko";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const supabase = buatKoneksiServer();
+
+  const { data: produk } = await supabase
+    .from("produk")
+    .select("nama, deskripsi, foto_url, kategori")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (!produk) {
+    return {
+      title: `Produk Tidak Ditemukan - ${toko.nama}`,
+      description: `Halaman produk tidak ditemukan di ${toko.nama}.`,
+    };
+  }
+
+  const fotoUtama = produk.foto_url
+    ? produk.foto_url.split(",")[0].trim()
+    : "/produk/batik.svg";
+
+  const deskripsi =
+    produk.deskripsi ||
+    `${produk.nama} - Koleksi batik berkualitas kategori ${produk.kategori || "Batik"} dari ${toko.nama}.`;
+
+  return {
+    title: `${produk.nama} - ${toko.nama}`,
+    description: deskripsi,
+    openGraph: {
+      title: `${produk.nama} - ${toko.nama}`,
+      description: deskripsi,
+      images: [
+        {
+          url: fotoUtama,
+          alt: produk.nama,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${produk.nama} - ${toko.nama}`,
+      description: deskripsi,
+      images: [fotoUtama],
+    },
+  };
+}
 
 export default async function HalamanDetailProduk({ params }) {
   const { id } = await params;

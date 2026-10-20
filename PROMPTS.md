@@ -417,3 +417,40 @@ Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
 
 **Perbaikan:**
 - Tidak ada perbaikan tambahan; mode gelap terintegrasi menyeluruh pada token desain sesuai kriteria US-25 pada percobaan pertama.
+
+
+## US-26 Metadata SEO dan Open Graph
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-26 Metadata SEO dan Open Graph
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Halaman detail produk (`app/produk/[id]/page.jsx`) mengimplementasikan fungsi `generateMetadata` dinamis dari Next.js App Router.
+- Judul (`title`) dan deskripsi (`description`) disesuaikan secara dinamis dengan nama dan deskripsi produk dari database Supabase.
+- Konfigurasi Open Graph (`openGraph`) dan Twitter Card (`twitter`) otomatis menyertakan nama produk, deskripsi produk, serta URL foto utama produk.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; metadata dinamis dan Open Graph berfungsi sesuai kriteria US-26 pada percobaan pertama.
+
+## US-28 Halaman 404 dan loading kustom
+
+**Prompt:**
+Baca app/docs/user-stories.md:
+- US-28 Halaman 404 dan loading kustom
+
+Kerjakan sesuai bagian itu, dan sesuaikan dengan Kriteria selesai.
+
+**Hasil:**
+- Halaman 404 kustom di `app/not-found.jsx` diperbarui dengan tampilan ramah, ikon pencarian, pesan informatif, serta tombol navigasi kembali ke beranda katalog (`/`).
+- Dibuat komponen skeleton loading kustom dengan animasi pulse:
+  - `app/loading.jsx` untuk skeleton halaman beranda/katalog produk.
+  - `app/produk/[id]/loading.jsx` untuk skeleton halaman detail produk dan produk terkait.
+  - `app/admin/loading.jsx` untuk skeleton halaman daftar produk admin.
+- Next.js build sukses.
+
+**Perbaikan:**
+- Tidak ada perbaikan tambahan; halaman 404 dan skeleton loading berfungsi sesuai kriteria US-28 pada percobaan pertama.
